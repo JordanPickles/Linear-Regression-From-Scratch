@@ -15,33 +15,55 @@ print(X_train.shape, y_train.shape)
 
 
 class LinearRegression():
-    def __init__(self, n_features):
+    def __init__(self, n_features, optimiser):
         np.random.seed(10)
-        self.W = np.random.randn(n_features,1)
+        self.w = np.random.randn(n_features,1)
         self.b = np.random.randn(1)
-        
+        self.optimiser = optimiser
+
 
     def preditctions(self, X):
-        # y_prediction = (X*self.W) + self.b
-        # return y_prediction
-        pass
-    def fit_model():
+        all_loss = []
+        y_prediction = X @ self.w + self.b
+        return y_prediction
+        
+    def fit_model(self, X, y):
+        for epoch in range(self.optimiser.epochs) #TODO build the epochs into the 
+
+            #Make predictions and update model        
+            predictions = self.predict(X)
+            new_w, new_b = self.optimiser.step(self.w, self.b, X, predictions, y) #TODO build this step in the optimiser class
+            self._update_params(new_w, new_b)
+
+            #Calculate the loss and append to a list to be visualised
+            loss = self.MSE_loss()
+            all_loss.append(loss)
+
+        plot_loss(all_loss)
+        print(f"Final Loss: {loss}")
+        print(f"Weight values:  {self.w}")
+        print(f"Bias values:    {self.b}")
+
+
         pass
 
     def _update_params(self, new_w, new_b):
-        pass
-    def SGD_opitmiser(self):
-        pass
-
-    def MSE(y_hat, labels):
+        self.w = new_w # sets this instances weight to the new weight passed to the function
+        self.b = new_b #sets this intances bias to the new bias value passed to the function
         pass
 
-    def RMSE():
+    def MSE_loss(y_hat, labels):
+        pass
+
+    def RMSE_loss():
         pass
 
     def R2():
         pass
 
+class SGDOptimiser():
+    def __init__(self):
+
     
 model = LinearRegression(n_features=8)
-model
+optimiser = SGDOptimiser()
