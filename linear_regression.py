@@ -15,7 +15,7 @@ print(X_train.shape, y_train.shape)
 
 
 class LinearRegression():
-    def __init__(self, n_features, optimiser):
+    def __init__(self, optimiser, n_features):
         np.random.seed(10)
         self.w = np.random.randn(n_features,1)
         self.b = np.random.randn(1)
@@ -23,11 +23,12 @@ class LinearRegression():
 
 
     def preditctions(self, X):
-        all_loss = []
+        
         y_prediction = X @ self.w + self.b
         return y_prediction
         
     def fit_model(self, X, y):
+        all_cost = []
         for epoch in range(self.optimiser.epochs) #TODO build the epochs into the 
 
             #Make predictions and update model        
@@ -36,34 +37,41 @@ class LinearRegression():
             self._update_params(new_w, new_b)
 
             #Calculate the loss and append to a list to be visualised
-            loss = self.MSE_loss()
-            all_loss.append(loss)
+            cost = self.MSE_loss()
+            all_cost.append(cost)
 
-        plot_loss(all_loss)
+        self.plot_cost(all_cost)
         print(f"Final Loss: {loss}")
         print(f"Weight values:  {self.w}")
         print(f"Bias values:    {self.b}")
 
 
-        pass
-
     def _update_params(self, new_w, new_b):
         self.w = new_w # sets this instances weight to the new weight passed to the function
         self.b = new_b #sets this intances bias to the new bias value passed to the function
-        pass
+    
 
     def MSE_loss(y_hat, labels):
+        errors = y_hat - labels
+        squared_errors = errors ** 2
+        mean_squared_error = sum(squared_errors) / len(squared_errors)
+        return mean_squared_error
+        
+
+    def RMSE_loss(self):
+        root_mean_squared_error = np.sqrt(self.MSE_loss())
+        return root_mean_squared_error
+
+    def R2(self):
         pass
 
-    def RMSE_loss():
-        pass
-
-    def R2():
+    def plot_cost(self):
         pass
 
 class SGDOptimiser():
     def __init__(self):
 
-    
-model = LinearRegression(n_features=8)
-optimiser = SGDOptimiser()
+
+if __name__ == "__main__":
+    optimiser = SGDOptimiser()
+    model = LinearRegression(optimiser, n_features=8)
