@@ -29,7 +29,7 @@ class LinearRegression():
         
     def fit_model(self, X, y):
         all_cost = []
-        for epoch in range(self.optimiser.epochs) #TODO build the epochs into the 
+        for epoch in range(self.optimiser.epochs) #TODO build the epochs into the optimiser class 
 
             #Make predictions and update model        
             predictions = self.predict(X)
@@ -41,7 +41,7 @@ class LinearRegression():
             all_cost.append(cost)
 
         self.plot_cost(all_cost)
-        print(f"Final Loss: {loss}")
+        print(f"Final Loss: {cost}") #TODO - update loss to cost?
         print(f"Weight values:  {self.w}")
         print(f"Bias values:    {self.b}")
 
