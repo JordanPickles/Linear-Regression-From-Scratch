@@ -105,8 +105,7 @@ class SGDOptimiser():
         It takes two arguments as input:
             lr: learning rate
             epochs: number of iterations over the training dataset
-        It initializes the learning rate and number of epochs attributes
-    """
+        It initializes the learning rate and number of epochs attributes"""
         self.lr = lr 
         self.epochs = epochs
     
@@ -135,8 +134,7 @@ class SGDOptimiser():
             labels: true output
             Returns:
             new_w : updated weight values
-            new_b : updated bias value
-    """
+            new_b : updated bias value"""
         dLdw, dLdb = self._calculate_derivatives(features, predictions, labels)
         new_w = w - self.lr * dLdw
         new_b = b - self.lr * dLdb
